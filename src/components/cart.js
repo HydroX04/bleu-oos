@@ -31,7 +31,7 @@ try {
 const getImageUrl = (imagePath) => {
   if (!imagePath) return "https://via.placeholder.com/60";
   if (imagePath.startsWith("http")) return imagePath;
-  return `http://localhost:8001${imagePath}`;
+  return `http://ims-productservices.onrender.com${imagePath}`;
 };
 
 // --- Mobile Order Summary Modal ---
@@ -140,7 +140,7 @@ const OrderDetailsModal = ({ show, onClose, cartItems, selectedCartItems, orderT
 
 const Cart = () => {
   const navigate = useNavigate();
-  const PRODUCTS_BASE_URL = "http://127.0.0.1:8001";
+  const PRODUCTS_BASE_URL = "http://ims-productservices.onrender.com";
   const { cartItems, updateQuantity, removeFromCart, clearCart } = useContext(CartContext);
 
   const [maxQuantities, setMaxQuantities] = useState({});
@@ -164,7 +164,7 @@ const Cart = () => {
       try {
         const token = localStorage.getItem("authToken");
         if (!token) return;
-        const response = await fetch('http://localhost:7001/delivery/settings', {
+        const response = await fetch('http://delivery-service-6zhu.onrender.com/delivery/settings', {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (response.ok) {
@@ -184,7 +184,7 @@ const Cart = () => {
       const token = localStorage.getItem("authToken");
       if (!token) return;
 
-      const res = await fetch("http://localhost:7004/debug/promos", {
+      const res = await fetch("http://ordering-service-8e9d.onrender.com/debug/promos", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -226,7 +226,7 @@ const Cart = () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const results = {};
-        const merchandiseResponse = await fetch('http://localhost:8002/merchandise/menu', { headers });
+        const merchandiseResponse = await fetch('http://bleu-stockservices.onrender.com/merchandise/menu', { headers });
         let merchandiseData = [];
         if (merchandiseResponse.ok) {
            merchandiseData = await merchandiseResponse.json();

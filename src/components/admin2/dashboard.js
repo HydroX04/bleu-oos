@@ -115,7 +115,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!authToken) { return; }
-    fetch("http://localhost:7004/cart/admin/orders/total", { headers: { Authorization: `Bearer ${authToken}`, }, })
+    fetch("http://ordering-service-8e9d.onrender.com/cart/admin/orders/total", { headers: { Authorization: `Bearer ${authToken}`, }, })
     .then((res) => { if (!res.ok) { throw new Error(`HTTP error! status: ${res.status}`); } return res.json(); })
     .then((data) => {
       console.log("Fetched total orders:", data);
@@ -126,7 +126,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!authToken) { return; }
-    fetch("http://localhost:7004/cart/admin/orders/pending", { headers: { Authorization: `Bearer ${authToken}`, }, })
+    fetch("http://ordering-service-8e9d.onrender.com/cart/admin/orders/pending", { headers: { Authorization: `Bearer ${authToken}`, }, })
       .then((res) => { if (!res.ok) { throw new Error(`HTTP error! status: ${res.status}`); } return res.json(); })
       .then((orders) => {
         const pendingCount = orders.filter(order => order.order_status === "Pending").length;
@@ -137,7 +137,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!authToken) { return; }
-    fetch("http://localhost:7004/cart/admin/orders/today_count", { headers: { Authorization: `Bearer ${authToken}`, }, })
+    fetch("http://ordering-service-8e9d.onrender.com/cart/admin/orders/today_count", { headers: { Authorization: `Bearer ${authToken}`, }, })
       .then((res) => { if (!res.ok) { throw new Error(`HTTP error! status: ${res.status}`); } return res.json(); })
       .then((data) => {
         setDashboardData(prev => ({ ...prev, todaysOrders: data.todays_orders, }));
@@ -147,7 +147,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!authToken) { return; }
-    fetch("http://localhost:7004/cart/admin/orders/manage", { headers: { Authorization: `Bearer ${authToken}`, }, })
+    fetch("http://ordering-service-8e9d.onrender.com/cart/admin/orders/manage", { headers: { Authorization: `Bearer ${authToken}`, }, })
       .then((res) => { if (!res.ok) { throw new Error(`HTTP error! status: ${res.status}`); } return res.json(); })
       .then((data) => {
         console.log("Fetched recent orders:", data);
@@ -177,7 +177,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!authToken) { return; }
     // Fetch all riders
-    fetch("http://localhost:7001/delivery/riders", { headers: { Authorization: `Bearer ${authToken}`, }, })
+    fetch("http://delivery-service-6zhu.onrender.com/delivery/riders", { headers: { Authorization: `Bearer ${authToken}`, }, })
       .then((res) => { if (!res.ok) { throw new Error(`HTTP error! status: ${res.status}`); } return res.json(); })
       .then((riders) => {
         console.log("Fetched riders:", riders);
@@ -189,7 +189,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!authToken) { return; }
     // Fetch all delivery orders
-    fetch("http://localhost:7004/delivery/admin/delivery/orders", { headers: { Authorization: `Bearer ${authToken}`, }, })
+    fetch("http://ordering-service-8e9d.onrender.com/delivery/admin/delivery/orders", { headers: { Authorization: `Bearer ${authToken}`, }, })
       .then((res) => { if (!res.ok) { throw new Error(`HTTP error! status: ${res.status}`); } return res.json(); })
       .then((data) => {
         console.log("Fetched delivery orders:", data);
@@ -217,7 +217,7 @@ const Dashboard = () => {
 
       setIsLoadingEarnings(true);
       try {
-        const response = await fetch(`http://localhost:7004/delivery/admin/rider-earnings/aggregated/${earningsFilter}`, {
+        const response = await fetch(`http://ordering-service-8e9d.onrender.com/delivery/admin/rider-earnings/aggregated/${earningsFilter}`, {
           headers: { 'Authorization': `Bearer ${authToken}` }
         });
         if (!response.ok) throw new Error();
@@ -385,7 +385,7 @@ const Dashboard = () => {
                     <li
                       onClick={() => {
                         try { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); } catch {}
-                        window.location.replace("http://localhost:4002/");
+                        window.location.replace("http://bleu-ums-zeta.vercel.app/");
                       }}
                       style={{ cursor: "pointer", padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px", color: "#dc3545" }}
                       onMouseEnter={e => e.currentTarget.style.backgroundColor = "#f8d7da"}

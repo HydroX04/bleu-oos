@@ -22,9 +22,9 @@ export const CartProvider = ({ children }) => {
   };
 
   const token = getToken();
-  const CART_API_URL = "http://localhost:7004/usercart";
-  const AUTH_API_URL = "http://localhost:4000/auth/users/me";
-  const PROMOS_API_URL = "http://localhost:7004/debug/promos";
+  const CART_API_URL = "http://ordering-service-8e9d.onrender.com/usercart";
+  const AUTH_API_URL = "http://authservices-npr8.onrender.com/auth/users/me";
+  const PROMOS_API_URL = "http://ordering-service-8e9d.onrender.com/debug/promos";
 
   // --- Fetch promotions on mount ---
   useEffect(() => {

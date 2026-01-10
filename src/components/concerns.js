@@ -16,7 +16,7 @@ const Concerns = () => {
       try {
         const token = localStorage.getItem('authToken');
         if (!token) return;
-        const response = await fetch('http://localhost:4000/users/profile', {
+        const response = await fetch('http://authservices-npr8.onrender.com/users/profile', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -45,7 +45,7 @@ const Concerns = () => {
       if (file) {
         formData.append('file', file);
       }
-      const response = await fetch('http://127.0.0.1:7007/concerns', {
+      const response = await fetch('http://concerns-service.onrender.com/concerns', {
         method: 'POST',
         body: formData,
       });

@@ -84,7 +84,7 @@ export default function AppHeader() {
     try {
       await Promise.all(
         unreadNotifications.map(notification =>
-          fetch(`http://localhost:7002/notifications/${notification.id}/read`, {
+          fetch(`http://notification-service-vbs9.onrender.com/notifications/${notification.id}/read`, {
             method: "PUT",
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -100,7 +100,7 @@ export default function AppHeader() {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem('authToken');
-      await fetch(`http://localhost:7002/notifications/${id}/read`, {
+      await fetch(`http://notification-service-vbs9.onrender.com/notifications/${id}/read`, {
         method: "PUT",
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -157,7 +157,7 @@ export default function AppHeader() {
         const token = localStorage.getItem('authToken');
         if (!token) return;
 
-        const response = await fetch('http://localhost:4000/users/profile', {
+        const response = await fetch('http://authservices-npr8.onrender.com/users/profile', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -189,7 +189,7 @@ export default function AppHeader() {
     if (isLoggedIn && username && token) {
       // Fetch existing notifications from backend
       const fetchNotifications = async () => {
-        const res = await fetch(`http://localhost:7002/notifications/${username}`, {
+        const res = await fetch(`http://notification-service-vbs9.onrender.com/notifications/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -207,7 +207,7 @@ export default function AppHeader() {
       fetchNotifications();
 
       // Create WebSocket connection with token auth
-      ws = new WebSocket(`ws://localhost:7002/ws/notifications/${username}?token=${token}`);
+      ws = new WebSocket(`ws://notification-service-vbs9.onrender.com/ws/notifications/${username}?token=${token}`);
 
       ws.onopen = () => {
         console.log("✅ Connected to Notification WebSocket");
@@ -252,7 +252,7 @@ export default function AppHeader() {
       if (result.isConfirmed) {
         logout();
         // Redirect to login page on frontend-auth at localhost:4002 and replace history
-        window.location.replace('http://localhost:4002/');
+        window.location.replace('http://bleu-ums-zeta.vercel.app/');
       }
     });
   };
@@ -382,7 +382,7 @@ export default function AppHeader() {
               <div className="d-flex align-items-center cart-and-buttons position-relative">
 
                 {!isLoggedIn ? (
-                  <Nav.Link as={Link} to="http://localhost:4002">
+                  <Nav.Link as={Link} to="http://bleu-ums-zeta.vercel.app">
                     <button className="btn btn-outline-primary">Sign In</button>
                   </Nav.Link>
                 ) : (

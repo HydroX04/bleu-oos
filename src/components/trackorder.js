@@ -42,10 +42,10 @@ async function geocodeAddress(address) {
 async function fetchRiderLocationFromBackend(riderId) {
     if (!riderId) return null;
     const tries = [
-        `http://localhost:7004/delivery/rider/${riderId}`,
-        `http://localhost:7004/delivery/rider/${riderId}/location`,
-        `http://localhost:7004/riders/${riderId}`,
-        `http://localhost:4000/users/riders/${riderId}`
+        `http://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}`,
+        `http://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/location`,
+        `http://ordering-service-8e9d.onrender.com/riders/${riderId}`,
+        `http://authservices-npr8.onrender.com/users/riders/${riderId}`
     ];
 
     for (const url of tries) {
@@ -114,7 +114,7 @@ async function fetchEstimatedDeliveryTime(orderId, customerLat, customerLng) {
     
     try {
         const response = await fetch(
-            `http://localhost:7001/delivery/estimate-delivery-time/${orderId}?customer_lat=${customerLat}&customer_lng=${customerLng}`
+            `http://delivery-service-6zhu.onrender.com/delivery/estimate-delivery-time/${orderId}?customer_lat=${customerLat}&customer_lng=${customerLng}`
         );
         
         if (response.ok) {
@@ -193,7 +193,7 @@ const TrackOrder = () => {
             try {
                 // This endpoint should fetch a single order by its ID.
                 // Using the trackorder_service on port 7008.
-                const response = await fetch(`http://localhost:7008/trackorder/${orderId}`, {
+                const response = await fetch(`http://trackorder-service.onrender.com/trackorder/${orderId}`, {
                     headers: { 'Authorization': `Bearer ${token}` },
                 });
 
@@ -311,7 +311,7 @@ const TrackOrder = () => {
             try {
                 const token = localStorage.getItem('authToken');
                 if (token && mounted) {
-                    const profileRes = await fetch('http://localhost:4000/users/profile', {
+                    const profileRes = await fetch('http://authservices-npr8.onrender.com/users/profile', {
                         headers: { 'Authorization': `Bearer ${token}` },
                     });
                     if (profileRes.ok && mounted) {

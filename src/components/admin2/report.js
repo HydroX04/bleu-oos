@@ -113,7 +113,7 @@ const Report = () => {
     const loadStoredHash = async () => {
       if (!showReportModal || !modalData) return;
       try {
-        const resp = await fetch('http://127.0.0.1:7006/blockchain/report-hash', {
+        const resp = await fetch('http://blockchain-service-5l6b.onrender.com/blockchain/report-hash', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ startDate: modalData.startDate, endDate: modalData.endDate })
@@ -154,7 +154,7 @@ const Report = () => {
 
     const fetchOrders = async () => {
       try {
-        const response = await fetch("http://localhost:7004/cart/admin/orders/manage", {
+        const response = await fetch("http://ordering-service-8e9d.onrender.com/cart/admin/orders/manage", {
           headers: {
             Authorization: `Bearer ${authToken}`
           }
@@ -342,7 +342,7 @@ const Report = () => {
       
       try {
           // Call the actual blockchain service
-          const response = await fetch('http://127.0.0.1:7006/blockchain/mint-report', {
+          const response = await fetch('http://blockchain-service-5l6b.onrender.com/blockchain/mint-report', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json',
@@ -374,7 +374,7 @@ const Report = () => {
 
               // Persist report + hash snapshot in backend
               try {
-                await fetch('http://127.0.0.1:7006/blockchain/report-hash', {
+                await fetch('http://blockchain-service-5l6b.onrender.com/blockchain/report-hash', {
                   method: 'POST',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({ startDate: modalData.startDate, endDate: modalData.endDate })
@@ -736,7 +736,7 @@ const Report = () => {
                         <FaUndo /> Refresh
                       </li>
                       <li
-                        onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("http://localhost:4002/"); }}
+                        onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("http://bleu-ums-zeta.vercel.app/"); }}
                         style={{ cursor: "pointer", padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px", color: "#dc3545" }}
                         onMouseEnter={e => e.currentTarget.style.backgroundColor = "#f8d7da"}
                         onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
