@@ -2,7 +2,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AppHeader from './components/header';
 
-import ForgotPassword from './components/forgotpassword';
+
 import Menu from './components/menulanding';
 import About from './components/aboutus';
 import Services from './components/services';
@@ -104,7 +104,7 @@ function MainApp() {
           <Route path="/concerns" element={<Concerns />} />
           {/* <Route path="/login" element={<LoginPage />} /> */}
           {/* <Route path="/signup" element={<Signup />} /> */}
-          <Route path="/forgot-password" element={<ForgotPassword />} />
+          
           <Route path="/reset-password" element={<Resetpassword />} />
           <Route element={<ProfileLayout />}>
             <Route path="/profile" element={<ProfilePage />} />
