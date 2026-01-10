@@ -81,7 +81,7 @@ const ProfileLayout = () => {
 
 function MainApp() {
   const location = useLocation();
-  const hideHeaderPaths = ['/login', '/signup', '/forgot-password', '/reset-password', '/Reset-password', '/admin', '/admin/*', '/rider/home', '/rider/riderhistory', '/rider/notifications', '/usermanagement'];
+  const hideHeaderPaths = ['/login', '/signup', ', '/reset-password', '/Reset-password', '/admin', '/admin/*', '/rider/home', '/rider/riderhistory', '/rider/notifications', '/usermanagement'];
   const shouldHideHeader = hideHeaderPaths.some(path =>
     location.pathname.startsWith(path)
   );

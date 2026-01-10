@@ -169,26 +169,13 @@ input[type="password"]:focus {
     background-color: #4B929D;
   }
   
-  .forgot-password {
-    text-align: right;
-    margin-bottom: 15px;
-  }
   
-  .forgot-password a {
-    color: gray; /* Gray color for 'Forgot Password?' */
-    text-decoration: none;
-    
-  }
   
-  .forgot-password a:hover {
-    text-decoration: underline;
-  }
   
-  .forgot-password a::after {
-    content: 'Forgot password?'; /* Appends 'Reset Here' after the link */
-    color: #4B929D; 
-    
-  }
+  
+ 
+  
+  
   .signup-link {
     text-align: center;
     margin-top: 15px;
