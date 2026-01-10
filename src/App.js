@@ -29,7 +29,7 @@ import RiderHome from './components/admin2/riderhome';
 import RiderHistory from './components/admin2/riderhistory';
 import RiderNotifications from './components/admin2/RiderNotifications';
 import NotFound from './components/NotFound';
-import Resetpassword from './components/Resetpassword';
+
 import Concerns from './components/concerns';
 import AdminConcerns from './components/admin2/concerns';
 import Promotions from './components/admin2/Promotions';
@@ -105,7 +105,7 @@ function MainApp() {
           {/* <Route path="/login" element={<LoginPage />} /> */}
           {/* <Route path="/signup" element={<Signup />} /> */}
           
-          <Route path="/reset-password" element={<Resetpassword />} />
+          
           <Route element={<ProfileLayout />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profile/orderhistory" element={<OrderHistory />} />
