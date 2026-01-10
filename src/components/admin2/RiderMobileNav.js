@@ -32,7 +32,7 @@ function RiderMobileNav({
   const fetchNotifications = async () => {
     if (!riderId || !authToken) return;
     try {
-      const response = await fetch(`http://localhost:7002/notifications/${riderId}`, {
+      const response = await fetch(`https://notification-service-vbs9.onrender.com/notifications/${riderId}`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -61,7 +61,7 @@ function RiderMobileNav({
   useEffect(() => {
     if (!riderId || !authToken) return;
 
-    const wsUrl = `ws://localhost:7002/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
+    const wsUrl = `ws://notification-service-vbs9.onrender.com/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
     const websocket = new WebSocket(wsUrl);
 
     websocket.onopen = () => {

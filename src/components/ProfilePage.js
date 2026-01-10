@@ -142,7 +142,7 @@ const ProfilePage = () => {
     formData.append("file", file);
 
     try {
-      const res = await fetch("http://authservices-npr8.onrender.com/users/profile/upload-photo", {
+      const res = await fetch("https://authservices-npr8.onrender.com/users/profile/upload-photo", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -165,7 +165,7 @@ const ProfilePage = () => {
         const token = localStorage.getItem('authToken');
         if (!token) return;
 
-        const response = await fetch('http://authservices-npr8.onrender.com/users/profile', {
+        const response = await fetch('https://authservices-npr8.onrender.com/users/profile', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -419,7 +419,7 @@ const ProfilePage = () => {
       formData.append('lat', userData.lat);
       formData.append('lng', userData.lng);
 
-      const response = await fetch('http://authservices-npr8.onrender.com/users/profile/update', {
+      const response = await fetch('https://authservices-npr8.onrender.com/users/profile/update', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',

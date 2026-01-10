@@ -54,8 +54,8 @@ const OrderHistory = () => {
 
       // --- 1. Fetch all product/merchandise data to get images ---
       const [productsRes, merchRes] = await Promise.all([
-        fetch(`http://localhost:8001/is_products/public/products/`),
-        fetch(`http://localhost:8002/merchandise/public/menu`)
+        fetch(`https://ims-productservices.onrender.com/is_products/public/products/`),
+        fetch(`https://bleu-stockservices.onrender.com/merchandise/public/menu`)
       ]);
 
       const productsList = productsRes.ok ? await productsRes.json() : [];
@@ -68,7 +68,7 @@ const OrderHistory = () => {
       // --- 2. Fetch order history ---
 
       try {
-        const response = await fetch(`http://localhost:7004/cart/orders/history`, {
+        const response = await fetch(`https://ordering-service-8e9d.onrender.com/cart/orders/history`, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
 
@@ -179,7 +179,7 @@ const OrderHistory = () => {
         </div>        ${order.deliveryImage ? `
         <div style="text-align: center; margin-bottom: 20px; padding: 15px; background-color: #e7f3ff; border-radius: 8px; border: 2px solid #4b929d;">
           <p style="margin: 0 0 10px 0; font-weight: bold; color: #2c3e50; font-size: 0.95em;">📸 PROOF OF DELIVERY</p>
-          <img src="http://localhost:7004${order.deliveryImage}" alt="Delivery Proof" style="max-width: 100%; max-height: 200px; border-radius: 8px; cursor: pointer; border: 2px solid #4b929d;" onclick="window.open('http://localhost:7004${order.deliveryImage}', '_blank')"/>
+          <img src="https://ordering-service-8e9d.onrender.com${order.deliveryImage}" alt="Delivery Proof" style="max-width: 100%; max-height: 200px; border-radius: 8px; cursor: pointer; border: 2px solid #4b929d;" onclick="window.open('https://ordering-service-8e9d.onrender.com${order.deliveryImage}', '_blank')"/>
           <p style="margin: 8px 0 0 0; font-size: 0.8em; color: #666;">Click image to view full size</p>
         </div>
         ` : ''}        <div class="receipt-body">
@@ -262,7 +262,7 @@ const OrderHistory = () => {
     if (!order || !token) return;
 
     try {
-      const response = await fetch(`http://localhost:7004/cart/admin/orders/${order.id}/status`, {
+      const response = await fetch(`https://ordering-service-8e9d.onrender.com/cart/admin/orders/${order.id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -363,7 +363,7 @@ const OrderHistory = () => {
           {order.products.length > 0 && order.products[0].image && (
             <div className="order-image-container">
               <img
-                src={order.products[0].image.startsWith('http') ? order.products[0].image : `http://localhost:8001${order.products[0].image}`}
+                src={order.products[0].image.startsWith('http') ? order.products[0].image : `https://ims-productservices.onrender.com${order.products[0].image}`}
                 alt={order.products[0].name}
                 className="order-item-image"
                 onError={(e) => { e.target.style.display = 'none'; }}

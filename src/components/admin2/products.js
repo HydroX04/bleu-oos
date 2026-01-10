@@ -100,7 +100,7 @@ function Products() {
 
     const handleLogout = () => {
         try { logout(); } catch {}
-        window.location.replace("http://bleu-ums-zeta.vercel.app/");
+        window.location.replace("https://bleu-ums-zeta.vercel.app/");
     };
 
     return (

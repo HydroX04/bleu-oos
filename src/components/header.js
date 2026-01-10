@@ -84,7 +84,7 @@ export default function AppHeader() {
     try {
       await Promise.all(
         unreadNotifications.map(notification =>
-          fetch(`http://notification-service-vbs9.onrender.com/notifications/${notification.id}/read`, {
+          fetch(`https://notification-service-vbs9.onrender.com/notifications/${notification.id}/read`, {
             method: "PUT",
             headers: {
               'Authorization': `Bearer ${token}`,
@@ -100,7 +100,7 @@ export default function AppHeader() {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem('authToken');
-      await fetch(`http://notification-service-vbs9.onrender.com/notifications/${id}/read`, {
+      await fetch(`https://notification-service-vbs9.onrender.com/notifications/${id}/read`, {
         method: "PUT",
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -157,7 +157,7 @@ export default function AppHeader() {
         const token = localStorage.getItem('authToken');
         if (!token) return;
 
-        const response = await fetch('http://authservices-npr8.onrender.com/users/profile', {
+        const response = await fetch('https://authservices-npr8.onrender.com/users/profile', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -189,7 +189,7 @@ export default function AppHeader() {
     if (isLoggedIn && username && token) {
       // Fetch existing notifications from backend
       const fetchNotifications = async () => {
-        const res = await fetch(`http://notification-service-vbs9.onrender.com/notifications/${username}`, {
+        const res = await fetch(`https://notification-service-vbs9.onrender.com/notifications/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -252,7 +252,7 @@ export default function AppHeader() {
       if (result.isConfirmed) {
         logout();
         // Redirect to login page on frontend-auth at localhost:4002 and replace history
-        window.location.replace('http://bleu-ums-zeta.vercel.app/');
+        window.location.replace('https://bleu-ums-zeta.vercel.app/');
       }
     });
   };
@@ -382,7 +382,7 @@ export default function AppHeader() {
               <div className="d-flex align-items-center cart-and-buttons position-relative">
 
                 {!isLoggedIn ? (
-                  <Nav.Link as={Link} to="http://bleu-ums-zeta.vercel.app">
+                  <Nav.Link as={Link} to="https://bleu-ums-zeta.vercel.app">
                     <button className="btn btn-outline-primary">Sign In</button>
                   </Nav.Link>
                 ) : (

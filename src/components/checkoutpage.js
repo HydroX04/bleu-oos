@@ -40,7 +40,7 @@ const CheckoutPage = () => {
         const cleanupTempCart = async () => {
           try {
             const token = localStorage.getItem('authToken');
-            await fetch(`http://localhost:7000/usercart/temp-clear/${tempCartId}`, {
+            await fetch(`https://ordering-service-8e9d.onrender.com/usercart/temp-clear/${tempCartId}`, {
               method: 'DELETE',
               headers: { 'Authorization': `Bearer ${token}` }
             });
@@ -60,7 +60,7 @@ const CheckoutPage = () => {
         const token = localStorage.getItem('authToken');
         if (!token) return;
          
-        const response = await fetch('http://authservices-npr8.onrender.com/users/profile', {
+        const response = await fetch('https://authservices-npr8.onrender.com/users/profile', {
           headers: {
             'Authorization': `Bearer ${token}`,
           },
@@ -102,7 +102,7 @@ const CheckoutPage = () => {
       if (!token) return;
 
       try {
-        const response = await fetch('http://ordering-service-8e9d.onrender.com/debug/promos', {
+        const response = await fetch('https://ordering-service-8e9d.onrender.com/debug/promos', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -144,7 +144,7 @@ const CheckoutPage = () => {
       try {
         // Pass cart item IDs and orderType to backend
         const cartItemIds = cartItems.map(item => item.cart_item_id).join(',');
-        const response = await fetch(`http://ordering-service-8e9d.onrender.com/cart/calculate-promos?username=${username}&cart_item_ids=${cartItemIds}&order_type=${encodeURIComponent(orderType)}`, {
+        const response = await fetch(`https://ordering-service-8e9d.onrender.com/cart/calculate-promos?username=${username}&cart_item_ids=${cartItemIds}&order_type=${encodeURIComponent(orderType)}`, {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -283,7 +283,7 @@ const confirmPayment = async (saved) => {
     console.log("Payment Method:", paymentMethod);
 
     // **CHANGED: Use the new endpoint that saves to POS immediately**
-    const response = await fetch("http://payment-service-nzo0.onrender.com/payment/confirm-payment-and-save-pos", {
+    const response = await fetch("https://payment-service-nzo0.onrender.com/payment/confirm-payment-and-save-pos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -323,7 +323,7 @@ const confirmPayment = async (saved) => {
       if (isTemporaryCart && tempCartId) {
         try {
           const token = localStorage.getItem('authToken');
-          await fetch(`http://ordering-service-8e9d.onrender.com/usercart/temp-clear/${tempCartId}`, {
+          await fetch(`https://ordering-service-8e9d.onrender.com/usercart/temp-clear/${tempCartId}`, {
             method: 'DELETE',
             headers: { 'Authorization': `Bearer ${token}` }
           });
@@ -465,7 +465,7 @@ const confirmPayment = async (saved) => {
       };
     });
     try {
-      const response = await fetch("http://payment-service-nzo0.onrender.com/payment/create-checkout", {
+      const response = await fetch("https://payment-service-nzo0.onrender.com/payment/create-checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

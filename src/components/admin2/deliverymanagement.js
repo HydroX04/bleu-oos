@@ -88,16 +88,16 @@ function DeliveryManagement() {
 
     try {
       const [ordersResponse, ridersResponse, pendingResponse, settingsResponse] = await Promise.all([
-        fetchWithTimeout("http://localhost:7004/delivery/admin/delivery/orders", {
+        fetchWithTimeout("https://ordering-service-8e9d.onrender.com/delivery/admin/delivery/orders", {
           headers: { Authorization: `Bearer ${authToken}` },
         }),
-        fetchWithTimeout("http://localhost:7001/delivery/riders", {
+        fetchWithTimeout("https://delivery-service-6zhu.onrender.com/delivery/riders", {
           headers: { Authorization: `Bearer ${authToken}` },
         }),
-        fetchWithTimeout("http://localhost:7004/cart/admin/orders/pending", {
+        fetchWithTimeout("https://ordering-service-8e9d.onrender.com/cart/admin/orders/pending", {
           headers: { Authorization: `Bearer ${authToken}` },
         }),
-        fetchWithTimeout("http://localhost:7001/delivery/settings", {
+        fetchWithTimeout("https://delivery-service-6zhu.onrender.com/delivery/settings", {
           headers: { Authorization: `Bearer ${authToken}` },
         })
       ]);
@@ -249,7 +249,7 @@ function DeliveryManagement() {
   const handleRiderAssignment = async (orderId, riderId) => {
     try {
       const response = await fetch(
-        `http://localhost:7004/delivery/orders/${orderId}/assign-rider?rider_id=${riderId}`,
+        `https://ordering-service-8e9d.onrender.com/delivery/orders/${orderId}/assign-rider?rider_id=${riderId}`,
         {
           method: "PUT",
           headers: {
@@ -284,7 +284,7 @@ function DeliveryManagement() {
       try {
         const rider = riders.find(r => r.UserID.toString() === riderId);
         if (rider) {
-          await fetch("http://localhost:7002/notifications/create?username=" + encodeURIComponent(rider.UserID) + "&title=New%20Order%20Assigned&message=Order%20%23" + orderId + "%20has%20been%20assigned%20to%20you.%20Please%20proceed%20to%20pickup.&type=info&order_id=" + orderId, {
+          await fetch("https://notification-service-vbs9.onrender.com/notifications/create?username=" + encodeURIComponent(rider.UserID) + "&title=New%20Order%20Assigned&message=Order%20%23" + orderId + "%20has%20been%20assigned%20to%20you.%20Please%20proceed%20to%20pickup.&type=info&order_id=" + orderId, {
             method: "POST",
             headers: {
               "Authorization": `Bearer ${authToken}`,
@@ -426,7 +426,7 @@ function DeliveryManagement() {
 
     if (formValues) {
       try {
-        const response = await fetch('http://localhost:7001/delivery/settings', {
+        const response = await fetch('https://delivery-service-6zhu.onrender.com/delivery/settings', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -593,7 +593,7 @@ function DeliveryManagement() {
                       <FaUndo /> Refresh
                     </li>
                     <li
-                      onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("http://localhost:4002/"); }}
+                      onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("https://bleu-ums-zeta.vercel.app/"); }}
                       style={{ cursor: "pointer", padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px", color: "#dc3545" }}
                       onMouseEnter={e => e.currentTarget.style.backgroundColor = "#f8d7da"}
                       onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}
@@ -973,7 +973,7 @@ function DeliveryManagement() {
                     </h6>
                     <div style={{ textAlign: "center" }}>
                       <img 
-                        src={`http://localhost:7004${selectedOrder.deliveryImage}`} 
+                        src={`https://ordering-service-8e9d.onrender.com${selectedOrder.deliveryImage}`} 
                         alt="Proof of Delivery" 
                         style={{ 
                           maxWidth: "100%", 
@@ -982,7 +982,7 @@ function DeliveryManagement() {
                           cursor: "pointer",
                           border: "2px solid #4b929d"
                         }}
-                        onClick={() => window.open(`http://localhost:7004${selectedOrder.deliveryImage}`, '_blank')}
+                        onClick={() => window.open(`https://ordering-service-8e9d.onrender.com${selectedOrder.deliveryImage}`, '_blank')}
                       />
                       <p style={{ fontSize: "0.85rem", color: "#666", marginTop: "8px" }}>
                         Click image to view full size

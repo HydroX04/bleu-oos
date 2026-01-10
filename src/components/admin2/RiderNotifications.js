@@ -45,10 +45,10 @@ const RiderNotifications = () => {
     const fetchOrders = async () => {
       if (!riderId || !authToken) return;
       try {
-        const response = await fetch(`http://localhost:7004/delivery/rider/${riderId}/orders`, {
+        const response = await fetch(`https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/orders`, {
           headers: { 'Authorization': `Bearer ${authToken}` }
         });
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        if (!response.ok) throw new Error(`http error! status: ${response.status}`);
         const data = await response.json();
         setOrders(data);
       } catch (e) {
@@ -76,7 +76,7 @@ const RiderNotifications = () => {
   const navigateToNotifications = () => navigate("/rider/notifications");
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = "http://localhost:4002/";
+    window.location.href = "https://bleu-ums-zeta.vercel.app/";
   };
 
   // --- FETCH EARNINGS ---
@@ -86,9 +86,9 @@ const RiderNotifications = () => {
       const now = new Date();
       const today = now.toLocaleDateString('en-CA');
       let url = '';
-      if (earningsFilter === 'Daily') url = `http://localhost:7004/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
-      else if (earningsFilter === 'Weekly') url = `http://localhost:7004/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
-      else if (earningsFilter === 'Monthly') url = `http://localhost:7004/delivery/rider/${riderId}/earnings/monthly?year=${now.getFullYear()}&month=${now.getMonth() + 1}`;
+      if (earningsFilter === 'Daily') url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
+      else if (earningsFilter === 'Weekly') url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
+      else if (earningsFilter === 'Monthly') url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/monthly?year=${now.getFullYear()}&month=${now.getMonth() + 1}`;
 
       if (!url) return;
       try {
@@ -107,10 +107,10 @@ const RiderNotifications = () => {
   const fetchNotifications = async () => {
     if (!riderId || !authToken) return;
     try {
-      const response = await fetch(`http://localhost:7002/notifications/${riderId}`, {
+      const response = await fetch(`https://notification-service-vbs9.onrender.com/notifications/${riderId}`, {
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok) throw new Error(`http error! status: ${response.status}`);
       const data = await response.json();
       // Transform API data to match UI format
       const transformedNotifications = data.map(notif => ({
@@ -136,7 +136,7 @@ const RiderNotifications = () => {
   useEffect(() => {
     if (!riderId || !authToken) return;
 
-    const wsUrl = `ws://localhost:7002/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
+    const wsUrl = `ws://notification-service-vbs9.onrender.com/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
     const websocket = new WebSocket(wsUrl);
 
     websocket.onopen = () => {
@@ -170,7 +170,7 @@ const RiderNotifications = () => {
   // --- MARK AS READ LOGIC ---
   const markAsRead = async (id) => {
     try {
-      const response = await fetch(`http://localhost:7002/notifications/${id}/read`, {
+      const response = await fetch(`https://notification-service-vbs9.onrender.com/notifications/${id}/read`, {
         method: 'PUT',
         headers: { 'Authorization': `Bearer ${authToken}` }
       });
@@ -190,7 +190,7 @@ const RiderNotifications = () => {
       if (unreadIds.length === 0) return;
 
       const promises = unreadIds.map(id =>
-        fetch(`http://localhost:7002/notifications/${id}/read`, {
+        fetch(`https://notification-service-vbs9.onrender.com/notifications/${id}/read`, {
           method: 'PUT',
           headers: { 'Authorization': `Bearer ${authToken}` }
         })

@@ -37,7 +37,7 @@ const Concerns = () => {
 
   const fetchConcerns = async () => {
     try {
-      const response = await fetch('http://concerns-service.onrender.com/concerns');
+      const response = await fetch('https://concerns-service.onrender.com/concerns');
       if (response.ok) {
         const data = await response.json();
         setConcernsData(data.map(concern => {
@@ -116,7 +116,7 @@ const Concerns = () => {
     let fileDisplay = '';
     if (concern.file_path) {
       const filename = concern.file_path.split(/[/\\]/).pop();
-      const fileUrl = `http://concerns-service.onrender.com/uploads/${filename}`;
+      const fileUrl = `https://concerns-service.onrender.com/uploads/${filename}`;
       const fileExtension = filename.split('.').pop().toLowerCase();
       if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
         fileDisplay = `<div style="margin-top: 15px;"><strong style="color: #121616ff; display: inline-flex; align-items: center;"><FaTag style="margin-right: 8px; color: #121616ff;"/>Attached Image:</strong><br><img src="${fileUrl}" alt="Attached image" style="max-width: 100%; max-height: 300px; border: 1px solid #ccc; border-radius: 4px; margin-top: 5px;"></div>`;
@@ -165,7 +165,7 @@ const Concerns = () => {
 
     if (result.isConfirmed && concern.status !== 'Resolved') {
       try {
-        const response = await fetch(`http://concerns-service.onrender.com/concerns/${id}/status`, {
+        const response = await fetch(`https://concerns-service.onrender.com/concerns/${id}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -211,7 +211,7 @@ const Concerns = () => {
 
     if (result.isConfirmed) {
       try {
-        const response = await fetch(`http://concerns-service.onrender.com/concerns/${id}`, {
+        const response = await fetch(`https://concerns-service.onrender.com/concerns/${id}`, {
           method: 'DELETE',
         });
         if (response.ok) {
@@ -269,7 +269,7 @@ const Concerns = () => {
                       <FaUndo /> Refresh
                     </li>
                     <li
-                      onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("http://bleu-ums-zeta.vercel.app/"); }}
+                      onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("https://bleu-ums-zeta.vercel.app/"); }}
                       style={{ cursor: "pointer", padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px", color: "#dc3545" }}
                       onMouseEnter={e => e.currentTarget.style.backgroundColor = "#f8d7da"}
                       onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}

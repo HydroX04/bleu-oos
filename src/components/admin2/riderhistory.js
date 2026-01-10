@@ -68,7 +68,7 @@ function RiderHistory() {
 
   useEffect(() => {
     if (authToken) {
-      fetch("http://localhost:4000/auth/users/me", {
+      fetch("https://authservices-npr8.onrender.com", {
         headers: { "Authorization": `Bearer ${authToken}` }
       })
         .then(res => {
@@ -99,7 +99,7 @@ function RiderHistory() {
 
           if (userId) {
             try {
-              const riderRes = await fetch(`http://localhost:4000/users/riders/${userId}`, {
+              const riderRes = await fetch(`https://authservices-npr8.onrender.com/users/riders/${userId}`, {
                 headers: { "Authorization": `Bearer ${authToken}` }
               });
               if (riderRes.ok) {
@@ -149,7 +149,7 @@ function RiderHistory() {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        const response = await fetch(`http://localhost:7004/delivery/rider/${riderId}/orders`, {
+        const response = await fetch(`https://authservices-npr8.onrender.com/delivery/rider/${riderId}/orders`, {
           headers: { 'Authorization': `Bearer ${authToken}` }
         });
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -174,9 +174,9 @@ function RiderHistory() {
       const now = new Date();
       const today = now.toLocaleDateString('en-CA'); 
       let url = '';
-      if (earningsFilter === 'Daily') url = `http://localhost:7004/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
-      else if (earningsFilter === 'Weekly') url = `http://localhost:7004/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
-      else if (earningsFilter === 'Monthly') url = `http://localhost:7004/delivery/rider/${riderId}/earnings/monthly?year=${now.getFullYear()}&month=${now.getMonth() + 1}`;
+      if (earningsFilter === 'Daily') url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
+      else if (earningsFilter === 'Weekly') url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
+      else if (earningsFilter === 'Monthly') url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/monthly?year=${now.getFullYear()}&month=${now.getMonth() + 1}`;
 
       if (!url) return;
       try {
@@ -245,7 +245,7 @@ function RiderHistory() {
   const navigateToNotifications = () => navigate("/rider/notifications");
   const handleLogout = () => {
     localStorage.clear();
-    window.location.replace("http://localhost:4002/");
+    window.location.replace("https://bleu-ums-zeta.vercel.app/");
   };
 
   return (

@@ -23,7 +23,7 @@ const Notification = () => {
     const fetchNotifications = async () => {
       try {
         const token = localStorage.getItem("authToken");
-        const res = await fetch(`http://localhost:7002/notifications/${username}`, {
+        const res = await fetch(`https://notification-service-vbs9.onrender.com/notifications/${username}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -57,7 +57,7 @@ const Notification = () => {
     if (!username) return;
 
     const token = localStorage.getItem("authToken");
-    const socket = new WebSocket(`ws://localhost:7002/ws/notifications/${username}?token=${token}`);
+    const socket = new WebSocket(`ws://notification-service-vbs9.onrender.com/ws/notifications/${username}?token=${token}`);
 
     socket.onopen = () => console.log("🔌 Connected to Notification WebSocket");
 
@@ -116,7 +116,7 @@ const Notification = () => {
       const token = localStorage.getItem("authToken");
       await Promise.all(
         notifications.map((n) =>
-          fetch(`http://localhost:7002/notifications/${n.id}/read`, {
+          fetch(`https://notification-service-vbs9.onrender.com/notifications/${n.id}/read`, {
             method: "PUT",
             headers: {
               Authorization: `Bearer ${token}`,
@@ -144,7 +144,7 @@ const Notification = () => {
   const markAsRead = async (id) => {
     try {
       const token = localStorage.getItem("authToken");
-      await fetch(`http://localhost:7002/notifications/${id}/read`, {
+      await fetch(`https://notification-service-vbs9.onrender.com/notifications/${id}/read`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,

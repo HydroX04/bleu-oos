@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 
-const PRODUCTS_BASE_URL = "http://localhost:8001";
-const DELIVERY_BASE_URL = "http://localhost:7001";
+const PRODUCTS_BASE_URL = "https://ims-productservices.onrender.com";
+const DELIVERY_BASE_URL = "https://delivery-service-6zhu.onrender.com";
 
 // Helper to get image URL
 const getImageUrl = (imagePath) => {
@@ -116,7 +116,7 @@ export const showPreparationTimeModal = async () => {
             // Save to backend
             try {
                 const token = localStorage.getItem("authToken");
-                const response = await fetch('http://localhost:7001/delivery/prep-times', {
+                const response = await fetch('https://delivery-service-6zhu.onrender.com/delivery/prep-times', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,

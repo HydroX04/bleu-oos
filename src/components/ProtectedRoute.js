@@ -7,7 +7,7 @@ const ProtectedRoute = ({ requiredRole, children, redirectTo }) => {
   const { isLoggedIn, userRole, initializing } = useContext(AuthContext);
 
   // External login portal default
-  const loginUrl = redirectTo || 'http://localhost:4002/';
+  const loginUrl = redirectTo || 'https://bleu-ums-zeta.vercel.app/';
 
   useEffect(() => {
     if (initializing) return;

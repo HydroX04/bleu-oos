@@ -6,7 +6,7 @@ import './concerns.css'; // Keeping your existing CSS import
 import adminImage from "../../assets/administrator.png";
 
 // API Base URL for Promotion Service
-const PROMOTION_API_BASE = 'http://promotion-service-qkxf.onrender.com';
+const PROMOTION_API_BASE = 'https://promotion-service-qkxf.onrender.com';
 
 
 
@@ -313,7 +313,7 @@ const Promotions = () => {
                       <FaUndo /> Refresh
                     </li>
                     <li
-                      onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("http://bleu-ums-zeta.vercel.app/"); }}
+                      onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("https://bleu-ums-zeta.vercel.app/"); }}
                       style={{ cursor: "pointer", padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px", color: "#dc3545" }}
                       onMouseEnter={e => e.currentTarget.style.backgroundColor = "#f8d7da"}
                       onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}

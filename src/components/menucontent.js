@@ -13,8 +13,8 @@ import { CartContext } from '../contexts/CartContext';
 import { checkStoreStatus } from './storeUtils';
 
 // Define API base URLs
-const PRODUCTS_BASE_URL = "http://ims-productservices.onrender.com";
-const MERCH_BASE_URL = "http://bleu-stockservices.onrender.com";
+const PRODUCTS_BASE_URL = "https://ims-productservices.onrender.com";
+const MERCH_BASE_URL = "https://bleu-stockservices.onrender.com";
 
 
 // Define category order
@@ -100,7 +100,7 @@ const MenuContent = () => {
             fetch(`${PRODUCTS_BASE_URL}/is_products/products/details/`, { headers, signal }),
             fetch(`${PRODUCTS_BASE_URL}/is_products/products/all_addons`, { headers, signal }),
             fetch(`${MERCH_BASE_URL}/merchandise/menu`, { headers, signal }),
-            fetch(`http://ordering-service-8e9d.onrender.com/debug/promos`, { headers, signal })
+            fetch(`https://ordering-service-8e9d.onrender.com/debug/promos`, { headers, signal })
           ]);
 
           if (!(typesRes.ok && productsRes.ok && detailsRes.ok && addOnsRes.ok && merchRes.ok && promosRes.ok)) {
@@ -250,7 +250,7 @@ const MenuContent = () => {
       try {
         const token = localStorage.getItem("authToken");
         if (!token) return;
-        const response = await fetch('http://delivery-service-6zhu.onrender.com/delivery/settings', {
+        const response = await fetch('https://delivery-service-6zhu.onrender.com/delivery/settings', {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (response.ok) {
@@ -640,7 +640,7 @@ const MenuContent = () => {
     const imageUrl = item.ProductImage
       ? item.ProductImage.startsWith('http')
         ? item.ProductImage
-        : `${item.ProductTypeName === "Merchandise" ? "http://bleu-stockservices.onrender.com" : "http://ims-productservices.onrender.com"}${item.ProductImage}`
+        : `${item.ProductTypeName === "Merchandise" ? "https://bleu-stockservices.onrender.com" : "https://ims-productservices.onrender.com"}${item.ProductImage}`
 
       : 'URL_TO_DEFAULT_IMAGE_OR_BLANK';
       
@@ -1042,7 +1042,7 @@ const MenuContent = () => {
         });
 
         // Create temporary server-side cart item
-        const tempCartResponse = await fetch('http://ordering-service-8e9d.onrender.com/usercart/temp-add', {
+        const tempCartResponse = await fetch('https://ordering-service-8e9d.onrender.com/usercart/temp-add', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -1188,7 +1188,7 @@ const MenuContent = () => {
                   )}
                   <div className="item-image-placeholder">
                     {item.ProductImage ?
-                      <img src={item.ProductImage.startsWith('http') ? item.ProductImage : `http://ims-productservices.onrender.com${item.ProductImage}`} alt={item.ProductName} />
+                      <img src={item.ProductImage.startsWith('http') ? item.ProductImage : `https://ims-productservices.onrender.com${item.ProductImage}`} alt={item.ProductName} />
                       : 'Image'
                     }
                   </div>

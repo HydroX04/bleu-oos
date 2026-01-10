@@ -9,7 +9,7 @@ function Staff() {
     const { logout } = useContext(AuthContext);
         const handleLogout = () => {
             try { logout(); } catch {}
-            window.location.replace("http://bleu-ums-zeta.vercel.app/");
+            window.location.replace("https://bleu-ums-zeta.vercel.app/");
         };
     const [isDropdownOpen, setDropdownOpen] = useState(false);
     const [showAddRoleModal, setShowAddRoleModal] = useState(false);

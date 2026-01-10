@@ -64,9 +64,9 @@ import Swal from 'sweetalert2';
   async function fetchCustomerLocationFromBackend(orderId) {
     if (!orderId) return null;
     const tries = [
-        `http://ordering-service-8e9d.onrender.com/delivery/order/${orderId}/customer/location`,
-        `http://ordering-service-8e9d.onrender.com/delivery/order/${orderId}/customer`,
-        `http://authservices-npr8.onrender.com/users/orders/${orderId}/customer/location`
+        `https://ordering-service-8e9d.onrender.com/delivery/order/${orderId}/customer/location`,
+        `https://ordering-service-8e9d.onrender.com/delivery/order/${orderId}/customer`,
+        `https://authservices-npr8.onrender.com/users/orders/${orderId}/customer/location`
     ];
 
     for (const url of tries) {
@@ -183,7 +183,7 @@ import Swal from 'sweetalert2';
         setLoading(true);
         setError(null);
         try {
-          const response = await fetch(`http://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/orders`, {
+          const response = await fetch(`https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/orders`, {
             headers: { 'Authorization': `Bearer ${authToken}` }
           });
           if (!response.ok) {
@@ -206,7 +206,7 @@ import Swal from 'sweetalert2';
     useEffect(() => {
       if (authToken) {
         setUserLoading(true);
-        fetch("http://authservices-npr8.onrender.com/auth/users/me", {
+        fetch("https://authservices-npr8.onrender.com/auth/users/me", {
           headers: { "Authorization": `Bearer ${authToken}` }
         })
           .then(res => {
@@ -237,7 +237,7 @@ import Swal from 'sweetalert2';
 
             if (userId) {
               try {
-                const riderRes = await fetch(`http://authservices-npr8.onrender.com/users/riders/${userId}`, {
+                const riderRes = await fetch(`https://authservices-npr8.onrender.com/users/riders/${userId}`, {
                   headers: { "Authorization": `Bearer ${authToken}` }
                 });
                 if (riderRes.ok) {
@@ -293,11 +293,11 @@ import Swal from 'sweetalert2';
 
         let url = '';
         if (earningsFilter === 'Daily') {
-          url = `http://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
+          url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
         } else if (earningsFilter === 'Weekly') {
-          url = `http://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
+          url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
         } else if (earningsFilter === 'Monthly') {
-          url = `http://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/monthly?year=${year}&month=${month}`;
+          url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/monthly?year=${year}&month=${month}`;
         }
 
         if (!url) return;
@@ -324,7 +324,7 @@ import Swal from 'sweetalert2';
 
       const updateLocation = async (lat, lng) => {
         try {
-          const response = await fetch(`http://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/location`, {
+          const response = await fetch(`https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/location`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -420,7 +420,7 @@ import Swal from 'sweetalert2';
         }
 
         // PATCH to cart/rider/orders
-        const cartResponse = await fetch(`http://ordering-service-8e9d.onrender.com/cart/rider/orders/${orderId}/status`, {
+        const cartResponse = await fetch(`https://ordering-service-8e9d.onrender.com/cart/rider/orders/${orderId}/status`, {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
@@ -433,7 +433,7 @@ import Swal from 'sweetalert2';
         }
 
         // PUT to delivery/orders
-        const deliveryResponse = await fetch(`http://ordering-service-8e9d.onrender.com/delivery/orders/${orderId}/status`, {
+        const deliveryResponse = await fetch(`https://ordering-service-8e9d.onrender.com/delivery/orders/${orderId}/status`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -457,7 +457,7 @@ import Swal from 'sweetalert2';
 
         if (posStatus) {
           console.log(`Updating POS for reference: ${referenceNumber}, status: ${posStatus}`);
-          const posResponse = await fetch(`http://127.0.0.1:9000/auth/purchase_orders/online/${referenceNumber}/status`, {
+          const posResponse = await fetch(`https://pos-service.onrender.com/auth/purchase_orders/online/${referenceNumber}/status`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
@@ -507,7 +507,7 @@ import Swal from 'sweetalert2';
               const formData = new FormData();
               formData.append('image', file);
               
-              const uploadResponse = await fetch(`http://ordering-service-8e9d.onrender.com/cart/rider/orders/${orderId}/delivery-image`, {
+              const uploadResponse = await fetch(`https://ordering-service-8e9d.onrender.com/cart/rider/orders/${orderId}/delivery-image`, {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${authToken}`,
@@ -775,7 +775,7 @@ import Swal from 'sweetalert2';
       localStorage.removeItem("riderId");
       localStorage.removeItem("riderName");
       localStorage.removeItem("riderPhone");
-      window.location.href = "http://bleu-ums-zeta.vercel.app/";
+      window.location.href = "https://bleu-ums-zeta.vercel.app/";
     };
 
     return (

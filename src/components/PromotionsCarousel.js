@@ -3,7 +3,7 @@ import { Carousel } from 'react-bootstrap';
 import './PromotionsCarousel.css';
 
 // API Base URL for Promotion Service
-const PROMOTION_API_BASE = 'http://localhost:7010';
+const PROMOTION_API_BASE = 'https://promotion-service-qkxf.onrender.com';
 
 const fetchActivePromotions = async () => {
   try {

@@ -64,7 +64,7 @@ function RiderDashboard() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
       
-      const response = await fetch('http://localhost:7001/delivery/riders', {
+      const response = await fetch('https://delivery-service-6zhu.onrender.com/delivery/riders', {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${authToken}`,
@@ -106,7 +106,7 @@ function RiderDashboard() {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
       
-      const response = await fetch(`http://localhost:7004/delivery/rider/${riderId}/orders`, {
+      const response = await fetch(`https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/orders`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${authToken}`,
@@ -141,11 +141,11 @@ function RiderDashboard() {
 
     let url = '';
     if (earningsFilter === 'Daily') {
-      url = `http://localhost:7004/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
+      url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/daily?target_date=${today}`;
     } else if (earningsFilter === 'Weekly') {
-      url = `http://localhost:7004/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
+      url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/weekly?target_date=${today}`;
     } else if (earningsFilter === 'Monthly') {
-      url = `http://localhost:7004/delivery/rider/${riderId}/earnings/monthly?year=${year}&month=${month}`;
+      url = `https://ordering-service-8e9d.onrender.com/delivery/rider/${riderId}/earnings/monthly?year=${year}&month=${month}`;
     }
 
     if (!url) return;
@@ -307,7 +307,7 @@ function RiderDashboard() {
                                 <FaUndo /> Refresh
                               </li>
                               <li
-                                onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("http://localhost:4002/"); }}
+                                onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("authToken"); localStorage.removeItem("expires_at"); localStorage.removeItem("userData"); window.location.replace("https://bleu-ums-zeta.vercel.app/"); }}
                                 style={{ cursor: "pointer", padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px", color: "#dc3545" }}
                                 onMouseEnter={e => e.currentTarget.style.backgroundColor = "#f8d7da"}
                                 onMouseLeave={e => e.currentTarget.style.backgroundColor = "transparent"}

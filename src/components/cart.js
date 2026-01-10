@@ -140,7 +140,7 @@ const OrderDetailsModal = ({ show, onClose, cartItems, selectedCartItems, orderT
 
 const Cart = () => {
   const navigate = useNavigate();
-  const PRODUCTS_BASE_URL = "http://ims-productservices.onrender.com";
+  const PRODUCTS_BASE_URL = "https://ims-productservices.onrender.com";
   const { cartItems, updateQuantity, removeFromCart, clearCart } = useContext(CartContext);
 
   const [maxQuantities, setMaxQuantities] = useState({});
@@ -164,7 +164,7 @@ const Cart = () => {
       try {
         const token = localStorage.getItem("authToken");
         if (!token) return;
-        const response = await fetch('http://delivery-service-6zhu.onrender.com/delivery/settings', {
+        const response = await fetch('https://delivery-service-6zhu.onrender.com/delivery/settings', {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (response.ok) {
@@ -184,7 +184,7 @@ const Cart = () => {
       const token = localStorage.getItem("authToken");
       if (!token) return;
 
-      const res = await fetch("http://ordering-service-8e9d.onrender.com/debug/promos", {
+      const res = await fetch("https://ordering-service-8e9d.onrender.com/debug/promos", {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -226,7 +226,7 @@ const Cart = () => {
       try {
         const headers = { Authorization: `Bearer ${token}` };
         const results = {};
-        const merchandiseResponse = await fetch('http://bleu-stockservices.onrender.com/merchandise/menu', { headers });
+        const merchandiseResponse = await fetch('https://bleu-stockservices.onrender.com/merchandise/menu', { headers });
         let merchandiseData = [];
         if (merchandiseResponse.ok) {
            merchandiseData = await merchandiseResponse.json();
