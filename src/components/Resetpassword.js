@@ -1,6 +1,6 @@
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppHeader from './components/header';
+import AppHeader from './header';
 
 import ForgotPassword from './components/forgotpassword';
 import Menu from './components/menulanding';
