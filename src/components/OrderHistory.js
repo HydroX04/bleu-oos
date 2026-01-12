@@ -242,9 +242,20 @@ const OrderHistory = () => {
   };
 
   const handleCancelClick = async (order) => {
+    const orderSummary = order.products
+      .map(p => `${p.quantity}x ${p.name}`)
+      .join(', ');
+
     const result = await Swal.fire({
       title: 'Confirm Cancel Order',
-      text: `Are you sure you want to cancel order #${order.id}? This action cannot be undone.`,
+      html: `
+        <div style="text-align: left; padding: 10px;">
+          <p><strong>Date:</strong> ${new Date(order.date).toLocaleDateString()}</p>
+          <p><strong>Items:</strong> ${orderSummary}</p>
+          <p><strong>Total:</strong> ₱${order.total.toFixed(2)}</p>
+          <p style="color: #d33; margin-top: 15px;"><strong>This action cannot be undone.</strong></p>
+        </div>
+      `,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -290,6 +301,19 @@ const OrderHistory = () => {
     }
   };
 
+  const handleShowDeliveryProof = (e, order) => {
+    e.stopPropagation();
+    if (order.deliveryImage) {
+      Swal.fire({
+        title: 'Proof of Delivery',
+        html: `<img src="https://ordering-service-8e9d.onrender.com${order.deliveryImage}" alt="Delivery Proof" style="max-width: 100%; max-height: 400px; border-radius: 8px; border: 2px solid #4b929d;" />`,
+        showConfirmButton: true,
+        confirmButtonText: 'Close',
+        width: '600px'
+      });
+    }
+  };
+
   const renderProductDetails = (products) => (
     <ul style={{ margin: 0, paddingLeft: '15px', fontSize: '1.1em', listStyle: 'none' }}>
       {products.map((p, idx) => (
@@ -313,7 +337,20 @@ const OrderHistory = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{ fontWeight: 'bold' }}>Order #{order.id}</span>
           {order.deliveryImage && (
-            <CameraFill color="#28a745" size={16} title="Proof of delivery available" />
+            <button
+              onClick={(e) => handleShowDeliveryProof(e, order)}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: '0',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center'
+              }}
+              title="Click to view proof of delivery"
+            >
+              <CameraFill color="#28a745" size={16} />
+            </button>
           )}
         </div>
         {getStatusBadge(order.status)}
@@ -351,7 +388,20 @@ const OrderHistory = () => {
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <span className="order-id">Order #{order.id}</span>
             {order.deliveryImage && (
-              <CameraFill color="#28a745" size={16} title="Proof of delivery available" />
+              <button
+                onClick={(e) => handleShowDeliveryProof(e, order)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  padding: '0',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center'
+                }}
+                title="Click to view proof of delivery"
+              >
+                <CameraFill color="#28a745" size={16} />
+              </button>
             )}
           </div>
           <span className="order-type">{order.orderType}</span>
