@@ -1,2 +1,7 @@
-// Re-export the admin2 forgot password component so top-level imports work
-export { default } from './admin2/forgotpassword';
+import './forgotpassword.css';
+
+const ForgotPassword = () => {
+  // your forgot password logic here
+};
+
+export default ForgotPassword;
