@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import logo from '../assets/logo.jpg';
 import homeImage from '../assets/coffee.jpg';
 import { Eye, EyeOff } from 'lucide-react';
-import './forgotpassword.css';
+
 
 const Resetpassword = () => {
   const [password, setPassword] = useState('');
