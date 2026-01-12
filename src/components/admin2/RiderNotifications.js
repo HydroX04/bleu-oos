@@ -136,32 +136,44 @@ const RiderNotifications = () => {
   useEffect(() => {
     if (!riderId || !authToken) return;
 
-    const wsUrl = `ws://notification-service-vbs9.onrender.com/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
-    const websocket = new WebSocket(wsUrl);
+    const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+    const wsUrl = `${protocol}://notification-service-vbs9.onrender.com/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
+
+    let websocket;
+
+    try {
+      websocket = new WebSocket(wsUrl);
+    } catch (err) {
+      console.error("WebSocket init failed:", err);
+      return;
+    }
 
     websocket.onopen = () => {
-      console.log('WebSocket connected for notifications');
+      console.log("WebSocket connected for notifications");
       setWs(websocket);
     };
 
     websocket.onmessage = async (event) => {
-      const data = JSON.parse(event.data);
-      console.log('Received notification:', data);
-      // Refetch notifications to ensure UI updates with latest data
-      await fetchNotifications();
-    };
-
-    websocket.onclose = () => {
-      console.log('WebSocket disconnected');
-      setWs(null);
+      try {
+        const data = JSON.parse(event.data);
+        console.log("Received notification:", data);
+        await fetchNotifications();
+      } catch (err) {
+        console.error("WS message parse error:", err);
+      }
     };
 
     websocket.onerror = (error) => {
-      console.error('WebSocket error:', error);
+      console.error("WebSocket error:", error);
+    };
+
+    websocket.onclose = () => {
+      console.log("WebSocket disconnected");
+      setWs(null);
     };
 
     return () => {
-      if (websocket) {
+      if (websocket && websocket.readyState === WebSocket.OPEN) {
         websocket.close();
       }
     };
