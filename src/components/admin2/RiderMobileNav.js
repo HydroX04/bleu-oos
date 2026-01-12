@@ -61,7 +61,7 @@ function RiderMobileNav({
   useEffect(() => {
     if (!riderId || !authToken) return;
 
-    const wsUrl = `ws://notification-service-vbs9.onrender.com/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
+    const wsUrl = `wss://notification-service-vbs9.onrender.com/ws/notifications/${riderId}?token=${encodeURIComponent(authToken)}`;
     const websocket = new WebSocket(wsUrl);
 
     websocket.onopen = () => {
