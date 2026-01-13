@@ -153,12 +153,12 @@ const CheckoutPage = () => {
         const cartItemIds = cartItems.map(item => item.cart_item_id).join(',');
         const apiUrl = `https://ordering-service-8e9d.onrender.com/cart/calculate-promos?username=${username}&cart_item_ids=${cartItemIds}&order_type=${encodeURIComponent(orderType)}`;
         
-        console.log('🎯 PROMO CALCULATION DEBUG:');
-        console.log('  - Username:', username);
-        console.log('  - Cart Items Count:', cartItems.length);
-        console.log('  - Cart Item IDs:', cartItemIds);
-        console.log('  - Order Type:', orderType);
-        console.log('  - Full API URL:', apiUrl);
+        // console.log('🎯 PROMO CALCULATION DEBUG:');
+        // console.log('  - Username:', username);
+        // console.log('  - Cart Items Count:', cartItems.length);
+        // console.log('  - Cart Item IDs:', cartItemIds);
+        // console.log('  - Order Type:', orderType);
+        // console.log('  - Full API URL:', apiUrl);
         console.log('  - Individual Cart Items:', cartItems.map(item => ({
           cart_item_id: item.cart_item_id,
           product_name: item.product_name,
