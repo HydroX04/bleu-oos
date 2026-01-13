@@ -207,8 +207,9 @@ export default function AppHeader() {
       fetchNotifications();
 
       // Create WebSocket connection with token auth
-      const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
-       ws = new WebSocket(`ws://notification-service-vbs9.onrender.com/ws/notifications/${username}?token=${token}`);
+      const wsProtocol = window.location.protocol === "https:" ? "wss" : "ws";
+      ws = new WebSocket(`${wsProtocol}://notification-service-vbs9.onrender.com/ws/notifications/${username}?token=${token}`
+      );
 
       ws.onopen = () => {
         console.log("✅ Connected to Notification WebSocket");
