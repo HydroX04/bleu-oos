@@ -445,7 +445,10 @@ import Swal from 'sweetalert2';
           throw new Error(`Failed to update delivery status: ${deliveryResponse.status}`);
         }
 
-        // Update POS status based on delivery status
+        // Update local state after successful critical updates
+        setOrders(prev => prev.map(o => o.id === orderId ? { ...o, currentStatus: newStatus } : o));
+
+        // Update POS status based on delivery status (non-blocking)
         let posStatus = null;
         if (newStatus === 'pickedup') {
           posStatus = "picked up";
@@ -457,26 +460,24 @@ import Swal from 'sweetalert2';
 
         if (posStatus) {
           console.log(`Updating POS for reference: ${referenceNumber}, status: ${posStatus}`);
-          const posResponse = await fetch(`https://pos-service.onrender.com/auth/purchase_orders/online/${referenceNumber}/status`, {
+          // Make POS update non-blocking - if it fails, still show success for main updates
+          fetch(`https://pos-service.onrender.com/auth/purchase_orders/online/${referenceNumber}/status`, {
             method: 'PATCH',
             headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${authToken}`
             },
             body: JSON.stringify({ newStatus: posStatus })
+          }).catch(err => {
+            console.warn('POS update failed (non-critical):', err);
           });
-          if (!posResponse.ok) {
-            throw new Error(`Failed to update POS status: ${posResponse.status}`);
-          }
         }
 
-        // Update local state
-        setOrders(prev => prev.map(o => o.id === orderId ? { ...o, currentStatus: newStatus } : o));
-
         // Success message
-        Swal.fire("Success", "Order marked as " + newStatus, "success");
+        Swal.fire("Success", `Order marked as ${newStatus}`, "success");
       } catch (e) {
-        Swal.fire('Error', e.message, 'error');
+        console.error('Error updating order status:', e);
+        Swal.fire("Error", `Failed to update order: ${e.message}`, "error");
       }
     };
 
@@ -719,7 +720,7 @@ import Swal from 'sweetalert2';
             if (status === window.google.maps.DirectionsStatus.OK) {
               directionsRenderer.setDirections(result);
               setRoutePolyline(directionsRenderer);
-            } else {
+            } else {fail
               console.error('Directions request failed due to ' + status);
             }
           });
