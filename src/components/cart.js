@@ -472,15 +472,47 @@ const Cart = () => {
 
   const handleCheckoutClick = async (e) => {
     e.preventDefault();
+
+    // ✅ COMPREHENSIVE VALIDATION
+    console.log('🛒 CHECKOUT VALIDATION:');
+    console.log('  - Cart items:', cartItems.length);
+    console.log('  - Selected items:', selectedCartItems.length);
+    console.log('  - Selected item details:', selectedCartItems);
+
     if (!checkStoreStatus()) {
       toast.error("Store is closed.");
       return;
     }
+
+    // ✅ ENHANCED CHECK - If nothing selected, auto-select all items
     if (selectedCartItems.length === 0) {
-      toast.error("Please select items.");
+      if (cartItems.length > 0) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'No Items Selected',
+          text: 'Please select items to checkout.',
+          confirmButtonText: 'Select All Items',
+          showCancelButton: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+            setSelectedCartItems(cartItems);
+            // Don't proceed immediately - user needs to click checkout again
+          }
+        });
+      } else {
+        toast.error("Your cart is empty.");
+      }
       return;
     }
-  
+
+    // ✅ VALIDATE ITEMS BEFORE NAVIGATION
+    if (selectedCartItems.length === 0) {
+      toast.error("Please select items to checkout.");
+      return;
+    }
+
+    console.log('✅ Proceeding to checkout with items:', selectedCartItems);
+
     if (orderTypeMain === 'Delivery') {
       if (!window.isSecureContext) {
         Swal.fire({
@@ -491,11 +523,32 @@ const Cart = () => {
         return;
       }
       setShowOrderModal(false);
-      // FIXED: Removed manual overlay handling here to prevent stuck loading screen
-      setIsCheckingLocation(true); 
+      setIsCheckingLocation(true);
     } else {
       setShowOrderModal(false);
-      navigate('/checkout', { state: { cartItems: selectedCartItems, orderType: orderTypeMain, paymentMethod: paymentMethodMain, deliveryFee: 0 } });
+
+      // ✅ FINAL VALIDATION BEFORE NAVIGATE
+      if (!selectedCartItems || selectedCartItems.length === 0) {
+        console.error('❌ Critical: selectedCartItems is empty at navigation!');
+        toast.error('Error: No items selected. Please try again.');
+        return;
+      }
+
+      console.log('🚀 Navigating to checkout with:', {
+        itemCount: selectedCartItems.length,
+        items: selectedCartItems,
+        orderType: orderTypeMain,
+        paymentMethod: paymentMethodMain
+      });
+
+      navigate('/checkout', {
+        state: {
+          cartItems: selectedCartItems,
+          orderType: orderTypeMain,
+          paymentMethod: paymentMethodMain,
+          deliveryFee: 0
+        }
+      });
     }
   };
 
