@@ -720,7 +720,7 @@ import Swal from 'sweetalert2';
             if (status === window.google.maps.DirectionsStatus.OK) {
               directionsRenderer.setDirections(result);
               setRoutePolyline(directionsRenderer);
-            } else {fail
+            } else {
               console.error('Directions request failed due to ' + status);
             }
           });
