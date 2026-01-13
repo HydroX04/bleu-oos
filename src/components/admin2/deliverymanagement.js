@@ -68,7 +68,7 @@ function DeliveryManagement() {
     }
 
     // Helper function to fetch with timeout
-    const fetchWithTimeout = (url, options = {}, timeoutMs = 10000) => {
+    const fetchWithTimeout = (url, options = {}, timeoutMs = 30000) => {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
       
